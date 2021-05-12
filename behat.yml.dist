@@ -1,0 +1,9 @@
+default:
+    suites:
+        default:
+            contexts:
+                - FeatureContext:
+                    client : '@test.client'
+
+    extensions:
+        Behat\Symfony2Extension: ~

@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  nginx:
+    container_name: nginx-test-wiza
+    build:
+      context: docker/nginx
+    ports:
+      - ${PORT_HTTP:-80}:80
+    environment:
+      PHP_FPM_UPSTREAM: php:9000
+      DNS_RESOLVER: 127.0.0.11
+    volumes:
+      - ./:/var/www/html:ro
+
+  php:
+    container_name: php-test-wiza
+    build:
+      context: docker/php
+      args:
+        DOCKER_UID: ${DOCKER_UID}
+    environment:
+      PHP_IDE_CONFIG: serverName=php-wiza-server
+      ENV: ${ENV}
+      COMPOSER_MEMORY_LIMIT: -1
+      DEBUG_LEVEL: debug
+    volumes:
+      - ./:/var/www/html
