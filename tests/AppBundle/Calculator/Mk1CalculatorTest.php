@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 class Mk1CalculatorTest extends TestCase
 {
+    use CanTestInvalidCasesTrait;
+
     /**
      * @var CalculatorInterface
      */
@@ -30,4 +32,5 @@ class Mk1CalculatorTest extends TestCase
         $this->assertInstanceOf(Change::class, $change);
         $this->assertEquals(2, $change->coin1);
     }
+
 }
